@@ -33,6 +33,7 @@ def count_experiment(nexus_df,
     #NEXUS
     nexus += len(nexus_df.event_id.unique())
     nexus_tot_ene = nexus_df.groupby('event_id').sum().reset_index()[['event_id', 'energy']]
+    nexus_tot_ene['event_id'] = nexus_tot_ene['event_id'].astype('int64')
 
     #RECO
     reco += len(isa_df.event.unique())
@@ -40,6 +41,8 @@ def count_experiment(nexus_df,
     #ENE
     # To create the reconstructed energy spectra
     isa_tot_ene = isa_df.groupby('event').sum().reset_index()[['event', 'energy']]
+    isa_tot_ene['event'] = isa_tot_ene['event'].astype('int64')
+
     isa_df_ = isa_df.merge(isa_tot_ene.rename(columns = {'energy':'tot_ener'}), on = ['event'])
     isa_df_ene = isa_df_[isa_df_.tot_ener > ene_min]
     ener += len(isa_df_ene.event.unique())
@@ -56,7 +59,9 @@ def count_experiment(nexus_df,
     
     #After the fiducialization, we take a look to the energy spectra and to the track multiplicity (mainly to justify the cuts)
     isa_tot_ene_fid = isa_df_fid.groupby('event').sum().reset_index()[['event', 'energy']]
+    isa_tot_ene_fid['event'] = isa_tot_ene_fid['event'].astype('int64')
     isa_numtracks = isa_df_fid[['event', 'numb_of_tracks']].drop_duplicates().numb_of_tracks
+    isa_numtracks['event'] = isa_numtracks['event'].astype('int64')
 
     #TRACK
     isa_df_track = isa_df_fid[isa_df_fid.numb_of_tracks == ntrack]
@@ -74,6 +79,7 @@ def count_experiment(nexus_df,
 
     # After track and ovl cuts, we pick the energy distribution of the second blob
     isa_eblob2 = isa_df_ovl[['event', 'eblob2']]
+    isa_eblob2['event'] = isa_eblob2['event'].astype('int64')
 
     #ROI
     isa_df_roi = isa_df_ovl[(isa_df_ovl.tot_ener > ene_roi[0]) & (isa_df_ovl.tot_ener < ene_roi[1])]
