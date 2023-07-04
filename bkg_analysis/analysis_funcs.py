@@ -60,7 +60,7 @@ def count_experiment(nexus_df,
     #After the fiducialization, we take a look to the energy spectra and to the track multiplicity (mainly to justify the cuts)
     isa_tot_ene_fid = isa_df_fid.groupby('event').sum().reset_index()[['event', 'energy']]
     isa_tot_ene_fid['event'] = isa_tot_ene_fid['event'].astype('int64')
-    isa_numtracks = isa_df_fid[['event', 'numb_of_tracks']].drop_duplicates().numb_of_tracks
+    isa_numtracks = isa_df_fid[['event', 'numb_of_tracks']].drop_duplicates()
     isa_numtracks['event'] = isa_numtracks['event'].astype('int64')
 
     #TRACK
