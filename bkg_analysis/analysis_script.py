@@ -34,6 +34,7 @@ for isotope in isotopes:
             total_counts += counts
             
             outpath= '/'.join(isaura_file.split('/')[:-3]) + '/'
+            nexus_tot_ene.to_hdf(outpath + outname, 'MCEner', append=True)
             isa_tot_ene.to_hdf(outpath + outname, 'RecoEner', append=True)
             isa_tot_ene_fid.to_hdf(outpath + outname, 'RecoEnerFid', append=True)
             isa_numtracks.to_hdf(outpath + outname, 'NumTracks', append=True)

@@ -25,7 +25,7 @@ def count_experiment(nexus_df,
                      zmin = 20, 
                      zmax = 1160, 
                      ntrack = 1, 
-                     ovl = 0, 
+                     ovlp = 0, 
                      ene_roi = (2.456, 2.472), 
                      eblob2 = 0.57):
     nexus, reco, ener, ener_roi, fid, fid_roi, track, track_roi, ovl, ovl_roi, roi, topo, topo_roi, topo_roi_full = 0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -71,10 +71,10 @@ def count_experiment(nexus_df,
     track_roi += len(isa_df_track_roi)
 
     #OVL
-    isa_df_ovl = isa_df_track[isa_df_track.ovlp_blob_energy == ovl]
+    isa_df_ovl = isa_df_track[isa_df_track.ovlp_blob_energy == ovlp]
     ovl += len(isa_df_ovl)
 
-    isa_df_ovl_roi = isa_df_track_roi[isa_df_track_roi.ovlp_blob_energy == ovl]
+    isa_df_ovl_roi = isa_df_track_roi[isa_df_track_roi.ovlp_blob_energy == ovlp]
     ovl_roi += len(isa_df_ovl_roi)
 
     # After track and ovl cuts, we pick the energy distribution of the second blob
