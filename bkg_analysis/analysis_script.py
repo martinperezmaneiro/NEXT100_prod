@@ -7,7 +7,7 @@ os.system('source ../setup.sh')
 import numpy as np
 import pandas as pd
 from glob import glob
-from bkg_analysis.analysis_funcs import remove_spurious_tracks, count_experiment
+from analysis_funcs import remove_spurious_tracks, count_experiment
 import invisible_cities.io.dst_io as dio
 
 isotopes = ['214Bi', '208Tl']
